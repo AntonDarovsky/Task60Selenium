@@ -18,7 +18,9 @@ namespace YandexSeleniumTests
 
         public static readonly By _mailSettingsButton = By.XPath("//*[contains(@class,'mail - SettingsButton')]");
 
-       
+        public static readonly By _userButton = By.CssSelector(".user-account__name");
+
+        public static readonly By _logOutButton = By.XPath("//*[contains(@class, 'legouser__menu-item_action_exit')]");
 
         public LoginPageYandex(IWebDriver driver) : base(driver)
         {
@@ -26,9 +28,9 @@ namespace YandexSeleniumTests
         
         public void Login(string login)
         {
-            Driver.FindElement(_loginField).SendKeys(login);
+            Driver.WaitForElement(_loginField, TimeSpan.FromMinutes(2)).SendKeys(login);
             
-            Driver.FindElement(_signInButton1).Click();
+            Driver.WaitForElement(_signInButton1, TimeSpan.FromMinutes(2)).Click();
 
             Thread.Sleep(1000);
         }
@@ -36,13 +38,17 @@ namespace YandexSeleniumTests
         public void Password(string password)
         {
             
-            Driver.FindElement(_passwordField).SendKeys(password);
+            Driver.WaitForElement(_passwordField, TimeSpan.FromMinutes(2)).SendKeys(password);
 
-            Driver.FindElement(_passwordButton).Click();
-
-            Thread.Sleep(5000);
+            Driver.WaitForElement(_passwordButton, TimeSpan.FromMinutes(2)).Click();
         }
 
+        public void LogOut()
+        {
+            Driver.WaitForElement(_userButton, TimeSpan.FromMinutes(3)).Click();
+
+            Driver.WaitForElement(_logOutButton, TimeSpan.FromMinutes(2)).Click();
+        }
         
     }
 }

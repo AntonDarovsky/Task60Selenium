@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using System.Threading;
 using YandexSeleniumTests;
 
@@ -28,9 +29,9 @@ namespace YandexTests
 
             loginPageYandex.Password("Antongekaleo97");
 
-            
-            var element = driver.FindElement(By.CssSelector(".user-account__name"));
-
+            loginPageYandex.LogOut();
+   
+            var element = driver.WaitForElement(By.CssSelector(".Button2-Text"), TimeSpan.FromMinutes(2));
 
             Assert.IsTrue(element.Displayed, "Wrong page!");
 

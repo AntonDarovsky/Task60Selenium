@@ -15,12 +15,12 @@ namespace YandexSeleniumTests
 
         public void ClickLoginButton()
         {
-            Driver.FindElement(_LoginButton1).Click();
+            Driver.WaitForElement(_LoginButton1, TimeSpan.FromMinutes(2)).Click();
         }
 
         public LoginPageYandex GoToLoginPage()
         {
-            Driver.FindElement(_LoginButton2).Click();
+            Driver.WaitForElement(_LoginButton2, TimeSpan.FromMinutes(2)).Click();
             return new LoginPageYandex(Driver);
         }
     }
